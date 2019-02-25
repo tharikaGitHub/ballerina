@@ -56,8 +56,9 @@ abstract class AbstractAnnotationReader extends BlockingNativeCallableUnit {
         long index = 0;
         for (String key : annotationMap.keys()) {
             final String annotationQName = key.split("\\$")[0];
-            final String annotationName = annotationQName.substring(annotationQName.lastIndexOf(":") + 1);
-            final String pkgQName = annotationQName.substring(0, annotationQName.lastIndexOf(":"));
+            final int lastIndex = annotationQName.lastIndexOf(":");
+            final String annotationName = annotationQName.substring(lastIndex + 1);
+            final String pkgQName = annotationQName.substring(0, lastIndex);
             final String[] pkgQNameParts = pkgQName.split(":");
             final String pkgVersion = pkgQNameParts.length > 1 ? pkgQNameParts[1] : "";
             final BMap<String, BValue> annotation =

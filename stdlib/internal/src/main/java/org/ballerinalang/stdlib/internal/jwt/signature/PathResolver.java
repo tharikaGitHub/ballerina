@@ -49,13 +49,12 @@ public class PathResolver {
     }
 
     private static String getSystemVariableValue(String variableName, String defaultValue) {
-        String value;
-        if (System.getProperty(variableName) != null) {
-            value = System.getProperty(variableName);
-        } else if (System.getenv(variableName) != null) {
+        String value = System.getProperty(variableName);
+        if (value == null) {
             value = System.getenv(variableName);
-        } else {
-            value = defaultValue;
+            if (value == null) {
+                value = defaultValue;
+            }
         }
         return value;
     }
